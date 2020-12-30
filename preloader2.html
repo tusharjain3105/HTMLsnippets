@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preloader</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .preloader {
+        height: 10rem;
+        width: 10rem;
+        background: white;
+        margin: 1rem;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .preloader div {
+        height: 3rem;
+        width: 3rem;
+    }
+
+    .preloader:nth-child(1) div {
+        border-radius: 50%;
+        background: radial-gradient(white, transparent 80%), linear-gradient(red, blue);
+        animation: load 2s linear infinite;
+        box-shadow: 0 0 10px 5px;
+        position: relative;
+    }
+
+    .preloader:nth-child(2) div {
+        border-radius: 50%;
+        background: conic-gradient(#ff0000, #ffa500, #ffff00, #008000, #0000ff, #4b0082, #ee82ee, #ff0000);
+        animation: load 2s linear infinite;
+        box-shadow: 0 0 10px;
+    }
+
+    .preloader:nth-child(3) div {
+        border-radius: 50%;
+        border: transparent 0.2rem solid;
+        border-top-color: grey;
+        animation: load 1s infinite linear;
+        /* box-shadow: 0 0 10px; */
+        position: relative;
+    }
+
+    .preloader:nth-child(4) div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: fit-content;
+        width: fit-content;
+    }
+
+    .preloader:nth-child(4) div span {
+        height: 0.5rem;
+        width: 0.5rem;
+        background: black;
+        border-radius: 50%;
+        margin: 0.25rem;
+        animation: size 1s infinite alternate-reverse;
+    }
+
+    .preloader:nth-child(5) span {
+        height: 0.5rem;
+        width: 0.5rem;
+        background: blue;
+        border-radius: 50%;
+        position: absolute;
+        animation: size2 0.8s infinite alternate-reverse;
+        box-shadow: 0 0 10px 3px blue;
+    }
+
+    .preloader:nth-child(4) div span:nth-child(1),
+    .preloader:nth-child(5) span:nth-child(1) {
+        animation-delay: 0;
+    }
+
+    .preloader:nth-child(4) div span:nth-child(2),
+    .preloader:nth-child(5) span:nth-child(2) {
+        animation-delay: calc(2000ms / 7);
+    }
+
+    .preloader:nth-child(4) div span:nth-child(3),
+    .preloader:nth-child(5) span:nth-child(3) {
+        animation-delay: calc(2000ms * 2 / 7);
+    }
+
+    .preloader:nth-child(4) div span:nth-child(4),
+    .preloader:nth-child(5) span:nth-child(4) {
+        animation-delay: calc(2000ms * 3 / 7);
+    }
+
+    .preloader:nth-child(4) div span:nth-child(5),
+    .preloader:nth-child(5) span:nth-child(5) {
+        animation-delay: calc(2000ms * 4 / 7);
+    }
+
+    .preloader:nth-child(4) div span:nth-child(6),
+    .preloader:nth-child(5) span:nth-child(6) {
+        animation-delay: calc(2000ms * 5 / 7);
+    }
+
+    .preloader:nth-child(4) div span:nth-child(7),
+    .preloader:nth-child(5) span:nth-child(7) {
+        animation-delay: calc(2000ms * 6 / 7);
+    }
+
+    @keyframes size2 {
+        to {
+            height: 0.5rem;
+            width: 0.5rem;
+            background: rgb(76, 76, 235);
+        }
+
+        from {
+            height: 1rem;
+            width: 1rem;
+            background: blue;
+        }
+    }
+
+    @keyframes size {
+        to {
+            height: 0.5rem;
+            width: 0.5rem;
+            background: grey;
+        }
+
+        from {
+            height: 1rem;
+            width: 1rem;
+            background: #000;
+        }
+    }
+
+    @keyframes load {
+        0% {
+            transform: rotate(0);
+        }
+
+        50% {
+            transform: rotate(180deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes fall {
+        from {
+            top: 0;
+        }
+
+        to {
+            top: calc(50% - 1rem);
+        }
+    }
+</style>
+
+<body>
+    <div class="preloader">
+        <div></div>
+    </div>
+    <div class="preloader">
+        <div></div>
+    </div>
+    <div class="preloader">
+        <div></div>
+    </div>
+    <div class="preloader">
+        <div>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <div class="preloader">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</body>
+<script>
+    r = 64;
+    element = document.querySelectorAll('.preloader:nth-child(5) span');
+    for (i = 0; i < 8; i++) {
+        a = i * Math.PI / 4;
+        y = r * Math.cos(a);
+        x = r * Math.sin(a);
+        console.log(x, y)
+        element[i].style.marginTop = x + 'px';
+        element[i].style.marginLeft = y + 'px';
+    }
+</script>
+
+</html>

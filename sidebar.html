@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar</title>
+</head>
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .sidebar{
+        height: 100vh;
+        width: 20rem;
+        background: linear-gradient(purple , black 30vh);
+        position: fixed;
+        color: white;
+        margin-left: -20rem;
+        box-shadow: 2px 0 10px black;
+        transition: margin-left 1s;
+    }
+    .sidebar .title{
+        text-align: center;
+        font-size: 3rem;
+        text-transform: uppercase;
+        margin: 1.5rem 0 4rem 0;
+    }
+    .sidebar .title::after{
+        content: 'Subtitle';
+        display: block;
+        font-size: 2rem;
+        text-transform: capitalize;
+        position: relative;
+        top: -0.5rem;
+    }
+    .sidebar section div{
+        background: linear-gradient(to right , purple , black);
+        height: 3rem;
+        border: 1px solid black;
+        padding: 1rem 1rem;
+        cursor: pointer;
+    }
+    .sidebar section div:hover{
+        background: purple;
+    }
+    .sidebar .section-title{
+        font-size: 1.5rem;
+    }
+    .sidebar .close{
+        font-size: 3rem;
+        position: absolute;
+        top: -0.5rem;
+        color: black;
+        cursor: pointer;
+    }
+</style>
+<body>
+    <div class="sidebar">
+        <div class="close">&times;</div>
+        <div class="title">Title</div>
+        <section>
+            <span class="section-title">Section 1</span>
+            <div onclick="location.href='#'">Choice 1</div><!--Using div as a link-->
+            <div>Choice 2</div>
+            <div>Choice 3</div>
+            <div>Choice 4</div>
+            <div>Choice 5</div>
+        </section>
+        <section>
+            <span class="section-title">Section 2</span>
+            <div>Choice 1</div>
+            <div>Choice 2</div>
+            <div>Choice 3</div> 
+        </section>
+    </div>
+    <button class='sidebar-open'>Open Sidebar</button>
+    
+    
+</body>
+<script>
+    document.onreadystatechange = function(){
+        if(this.readyState == 'complete'){
+            document.querySelector('.sidebar .close').onclick = function(){
+                document.querySelector('.sidebar').style.marginLeft = '-20rem';
+            }
+            document.querySelector('.sidebar-open').onclick = function () {
+                document.querySelector('.sidebar').style.marginLeft = '0';
+            }
+        }
+    }
+</script>
+</html>

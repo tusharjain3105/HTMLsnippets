@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floating Button</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .float-btn {
+        border-radius: 50%;
+        position: fixed;
+        bottom: 5rem;
+        right: 5rem;
+        background: purple;
+        height: 4rem;
+        width: 4rem;
+        box-shadow: 0 0 10px 5px purple;
+        text-align: center;
+        font-size: 3.5rem;
+        font-weight: bolder;
+        color: rgb(63, 2, 63);
+        cursor: pointer;
+        outline: none;
+    }
+
+    .float-btn:hover {
+        box-shadow: 0 0 20px 5px purple, 0 0 10px 5px black;
+    }
+
+    .hidden {
+        display: none;
+        position: relative;
+        bottom: 23rem;
+    }
+
+    .hidden div {
+        background: purple;
+        border-radius: 50%;
+        margin: 0.5rem 0;
+    }
+</style>
+
+<body>
+    <div class="float-btn" onclick="toggle(document.querySelector('.hidden'));">
+        +
+        <div class="hidden">
+            <div>A</div>
+            <div>B</div>
+            <div>C</div>
+            <div>D</div>
+        </div>
+    </div>
+</body>
+<script>
+    const toggle = (element) => {
+        if (element.style.display == 'none') element.style.display = 'block';
+        else element.style.display = 'none';
+    }
+</script>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving Face</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background: black;
+        height: 100vh;
+    }
+
+    .face {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 15rem;
+        width: 15rem;
+        border-radius: 50%;
+        background:yellow;
+    }
+
+    .eyes {
+        height: 3rem;
+        width: 3rem;
+        background: white;
+        border-radius: 50%;
+        position: absolute;
+        top: 4rem;
+        border: 2px solid rgb(124, 124, 6);
+    }
+
+    .eyes:first-child {
+        left: 3rem;
+    }
+
+    .eyes:last-child {
+        right: 3rem;
+    }
+
+    .ball {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #000;
+        height: 1rem;
+        width: 1rem;
+        border-radius: 50%;
+    }
+    .mouth{
+        position: relative;
+        top: 7rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: white;
+        border: 2px solid rgb(124, 124, 6);
+        height: 2rem;
+        width: 5rem;
+        border-radius: 0 0 50% 50%;
+        transition: all 100ms;
+    }
+    .face:hover~.mouth, .mouth:hover{
+        border-radius: 50% 50% 0 0;
+    }
+</style>
+
+<body>
+    <div class="face">
+        <div class="eyes">
+            <div class="ball"></div>
+        </div>
+        <div class="eyes">
+            <div class="ball"></div>
+        </div>
+    </div>
+    <div class="mouth"></div>
+</body>
+<script>
+    move = (element , x , y) => {
+        length = Math.sqrt(x * x + y * y);
+        angle = Math.atan(y / x) * 180 / Math.PI;
+        if (x < 0) angle += 180;
+        if (angle < 0) angle += 360;
+        if (length > 13) length = 13;
+        ballY = length * Math.sin(Math.atan(y / x));
+        ballX = length * Math.cos(Math.atan(y / x));
+        if (angle >= 0 && angle < 90) {
+            element.style.marginTop = -ballY + 'px';
+            element.style.marginLeft = ballX + 'px';
+        }
+        if (angle >= 90 && angle < 180) {
+            element.style.marginTop = ballY + 'px';
+            element.style.marginLeft = -ballX + 'px';
+        }
+        if (angle >= 180 && angle < 270) {
+            element.style.marginTop = ballY + 'px';
+            element.style.marginLeft = -ballX + 'px';
+        }
+        if (angle >= 270 && angle < 360) {
+            element.style.marginTop = -ballY + 'px';
+            element.style.marginLeft = ballX + 'px';
+        }
+    }
+    document.addEventListener('mousemove', (e) => {
+        X = screen.availWidth;
+        Y = parseFloat(getComputedStyle(document.querySelector('body')).height);
+        x = - X / 2 + e.x + 48;
+        y = Y / 2 - e.y - 32;
+        move(document.querySelector('.ball') , x , y);
+        x = - X / 2 + e.x - 48;
+        move(document.querySelectorAll('.ball')[1], x, y);
+    });
+</script>
+
+</html>

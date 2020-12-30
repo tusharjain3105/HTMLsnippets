@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .page {
+        margin-top: 5rem;
+        display: none;
+    }
+
+    .page[active] {
+        display: block;
+    }
+
+    .navbar {
+        font-weight: bold;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3rem;
+        border-radius: 0 0 10px 10px;
+        background: purple;
+        padding: 1rem 1rem 0 4rem;
+    }
+
+    .navbar .nav-item[active] {
+        display: inline-block;
+        padding: 0.5rem;
+        background: rgb(77, 2, 77);
+    }
+
+    .navbar .nav-item {
+        top: -0.1rem;
+        display: inline-block;
+        padding: 0.5rem;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        position: relative;
+        width: 6rem;
+        text-align: center;
+    }
+
+    .navbar .logo {
+        height: 3rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .navbar [subnav] {
+        position: absolute;
+        background: rgb(77, 2, 77);
+        top: 2rem;
+        transform: translateX(calc(-50% + 3rem));
+        border-radius: 0 0 5px 5px;
+        display: none;
+    }
+
+    .navbar .nav-item[active] [subnav] {
+        display: flex;
+    }
+
+    .navbar [subnav] .nav-item:hover {
+        background: purple;
+    }
+</style>
+
+<body>
+    <div class="navbar">
+        <img src="logo/logo-short.png" alt="Codever" class="logo">
+        <div class="nav-item" active onclick='switchNav(this);' name='home'>Home</div>
+        <div class='nav-item' onclick='switchNav(this);'>Category
+            <div subnav>
+                <div class='nav-item' onclick='switchNav(this);' name='mobiles'>Mobiles</div>
+                <div class='nav-item' onclick='switchNav(this);' name='laptops'>Laptops</div>
+                <div class='nav-item' onclick='switchNav(this);' name='TV'>TV</div>
+            </div>
+        </div>
+        <div class="nav-item" onclick='switchNav(this);' name='contact'>Contact Us</div>
+        <div class="nav-item" onclick='switchNav(this);' name='about'>About Us</div>
+        <div class="nav-item" onclick='switchNav(this);'>Setting
+            <div subnav>
+                <div class='nav-item' onclick='switchNav(this);' name='user'>User</div>
+                <div class='nav-item' onclick='switchNav(this);' name='account'>Account</div>
+                <div class='nav-item' onclick='switchNav(this);' name='payment'>Payment</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" navfor='home' active>
+        <h2>This is a demo of a navbar with client side routing created using Vannila JS. Source Code is available on
+            next slide or in description. Join codever community for more...</h2>
+    </div>
+    <div class="page" navfor='mobiles'>
+        This is Mobiles Page.
+    </div>
+    <div class="page" navfor='laptops'>
+        This is Laptops Page.
+    </div>
+    <div class="page" navfor='TV'>
+        This is TV Page.
+    </div>
+    </div>
+    <div class="page" navfor='contact'>
+        This is Contact us Page.
+    </div>
+    <div class="page" navfor='about'>
+        This is About us Page.
+    </div>
+    <div class="page" navfor='user'>
+        This is User Page.
+    </div>
+    <div class="page" navfor='account'>
+        This is Account Page.
+    </div>
+    <div class="page" navfor='payment'>
+        This is Laptops Page.
+    </div>
+</body>
+<script>
+    document.onreadystatechange = (e) => {
+        if (e.readyState == 'complete') {
+            window.history.pushState('', '', '/');
+        }
+    }
+    const switchNav = (e) => {
+        document.querySelectorAll('.navbar .nav-item').forEach((e) => { e.removeAttribute('active') });
+        e.setAttribute('active', '');
+        if (e.hasAttribute('name')) {
+            document.querySelector('.page[active]').removeAttribute('active');
+            document.querySelector('.page[navfor=' + e.getAttribute('name') + ']').setAttribute('active', '');
+        }
+        active = document.querySelector('.nav-item[active]').getAttribute('name');
+        if (active == 'home')
+            active = '/';
+        window.history.pushState('', '', active);
+    }
+</script>
+
+</html>
